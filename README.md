@@ -2,7 +2,7 @@
 
 **Overview**
 
-This project develops and evaluates machine learning models to predict short and long term trends in the S&P 500 index. The models are trained, using historical price data, technical indicators (e.g. EMA, MACD, RSI) and news sentiment data. I implement a acktesting system to evaluate the accuracy and performance of each model.
+This project develops and evaluates machine learning models to predict short and long term trends in the S&P 500 index. The models are trained, using historical price data, technical indicators (e.g. EMA, MACD, RSI) and news sentiment data. It implements a acktesting system to evaluate the accuracy and performance of each model.
 
 **Objectives**
 * Download and clean data
@@ -21,7 +21,7 @@ results/
 
 **Installation**
 git clone <repo-url>
-cd INDIVIDUAL-PROJECT
+cd Individual-Project
 python -m venv venv
 source venv/bin/activate # On Linux
 pip install -r requirements.txt
@@ -44,5 +44,3 @@ This project is conducted for academic purposes only and does not consitute fina
 Royal Sule
 Univeristy of Leeds
 2026
-
-
