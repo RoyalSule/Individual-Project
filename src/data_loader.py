@@ -21,7 +21,7 @@ class DataLoader:
 
     def clean(self):
         """Clean and prepare data."""
-        logger.info("Clean historical data...")
+        logger.info(f"Clean historical data...")
         del self.data["Dividends"]
         del self.data["Stock Splits"]
         self.data["Tomorrow"] = self.data["Close"].shift(-1)
@@ -30,7 +30,7 @@ class DataLoader:
 
     def add_technical_indicators(self):
         """Add EMA, MACD and ATR indicators."""
-        logger.info("Adding technical indicators.")
+        logger.info(f"Adding technical indicators.")
         # 1. EMA (Exponential Moving Average)
         self.data["EMA_9"] = self.data["Close"].ewm(span=9, adjust=False).mean()
         # 2. MACD (Moving Average Convergence/Divergence)
@@ -50,12 +50,6 @@ class DataLoader:
         tr = pd.concat([high - low, abs(high - closep), abs(low - closep)], axis=1).max(axis=1)
         self.data["ATR_14"] = tr.rolling(window=14).mean()
         return self.data
-
-if __name__ == "__main__":
-    loader = DataLoader()
-
-    data = loader.download()
-    print(f"Download complete.")
-
-    cleaned = loader.clean()
-    print(f"Clean complete.")
+    
+    def add_news_sentiment(self):
+        pass
