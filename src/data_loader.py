@@ -31,7 +31,7 @@ class DataLoader:
     def add_features(self):
         """Add scale-invariant features."""
         logger.info(f"Adding features...")
-        horizons = [2, 5, 60, 250]
+        horizons = [2, 5, 60, 250, 1000]
         for horizon in horizons:
             # Close ratio
             self.data[f"Close_Ratio_{horizon}"] = self.data["Close"] / self.data["Close"].rolling(horizon).mean()
@@ -54,6 +54,8 @@ class DataLoader:
         # 2. MACD (Moving Average Convergence/Divergence)
         ema_12 = self.data["Close"].ewm(span=12, adjust=False).mean()
         ema_26 = self.data["Close"].ewm(span=26, adjust=False).mean()
+        self.data["EMA_12"] = ema_12
+        self.data["EMA_26"] = ema_26
         # MACD Line = EMA(12) - EMA(26)
         self.data["MACD"] = ema_12 - ema_26
         # Signal Line = EMA(9) of the MACD Line
@@ -68,4 +70,4 @@ class DataLoader:
         tr = pd.concat([high - low, abs(high - closep), abs(low - closep)], axis=1).max(axis=1)
         self.data["ATR_14"] = tr.rolling(window=14).mean()
         return self.data
-
+    
